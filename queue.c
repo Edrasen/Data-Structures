@@ -1,21 +1,26 @@
 #include<stdio.h>
 
-typedef struct element
+#define TRUE  1
+#define FALSE  0
+
+typedef unsigned char boolean;
+
+typedef struct
 {
 	char e;
 }element;
 
-typedef struct node
+typedef struct
 {
-	elemento e;
-	struct node *next;
+	element e;
+	node *next;
 
 }node;
 
-typedef struct queue
+typedef struct
 {
-	struct node *up;
-	struct node *down;
+	node *up;
+	node *down;
 	int num_elem;
 }queue;
 
@@ -25,7 +30,7 @@ void Initialize(queue *q){
 	q->num_elem = 0;
 }
 
-void queue(queue *q, element e){
+void nqueue(queue *q, element e){
 	/*new element pointer, all this block could be replaced by "new" C++ function, 
 	which it is used like constructor*/
 	node *aux;
@@ -68,8 +73,8 @@ element Dequeue(queue *q){
 	else{
 		aux = q->down;
 		e = q->down->e;
-		aux = c->down->next;
-		free(c->down);
+		aux = q->down->next;
+		free(q->down);
 		q->num_elem--;
 		q->down = aux;
 
@@ -82,18 +87,18 @@ element Dequeue(queue *q){
 }
 
 boolean Empty(queue *q){
-	return (q->num-elem==0) ? TRUE : FALSE;	
+	return (q->num_elem==0) ? TRUE : FALSE;	
 }
 
-elemento Down(queue *q){
-	return q->Down->e;
+element Down(queue *q){
+	return q->down->e;
 }
 
-elemento Up(queue *q){
-	return q->Up->e; 
+element Up(queue *q){
+	return q->up->e; 
 }
 
-int Size(queue *q){
+int size(queue *q){
 	return q->num_elem;
 }
 
@@ -127,8 +132,6 @@ void Destroy(queue *q){
 		free(aux); 
 	}
 
-	c->num_elem = 0;
-	C->up = NULL;
-}
-
+	q->num_elem = 0;
+	q->up = NULL;
 }
