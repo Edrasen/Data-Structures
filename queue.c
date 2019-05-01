@@ -109,7 +109,7 @@ element Elemento(queue *q, int i){
 
 	if(i>0&&i<=Size(q)){
 		aux = q->up;
-		for(j=1; j<i j++)
+		for(j=1; j<i; j++)
 		{
 			aux = aux->next;
 			r = aux->e;
