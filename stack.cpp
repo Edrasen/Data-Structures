@@ -1,5 +1,6 @@
 #include<iostream>
-#include<bool>
+
+
 using namespace std;
 
 struct node{
@@ -7,7 +8,7 @@ struct node{
 	struct node *next;
 
 	node(int d){
-	data: = d;
+	data = d;
 	next = NULL;
 	}
 };
@@ -35,26 +36,26 @@ int main(){
 	int ctrl;
 	node *stack = NULL;
 	do{	
-		cout<<"Ingrese la opcion que desea realizar";
-		cout<<"1.-Ingresar elemento a la pila";	
-		cout<<"2.-Retirar elemento de la pila";		
-		cout<<"3.-Verificar si la pila esta vacia";
-		cout<<"4.-Salir";
+		cout<<"Ingrese la opcion que desea realizar"<<endl;
+		cout<<"1.-Ingresar elemento a la pila"<<endl;	
+		cout<<"2.-Retirar elemento de la pila"<<endl;		
+		cout<<"3.-Verificar si la pila esta vacia"<<endl;
+		cout<<"4.-Salir"<<endl;
 
 		cin>>ctrl;
 
 		if(ctrl == 1){
 		int num;
-		cout<<"Que numero desea agregar a la pila?";
+		cout<<"Que numero desea agregar a la pila?"<<endl;
 		cin>>num;
 		push(stack,num);
 		}
 		else if(ctrl == 2){
 		int aux;
 		pop(stack, aux);
-		cout<<"Se retiro el elemento"<< aux <<"de la pila";
+		cout<<"Se retiro el elemento"<< aux <<"de la pila"<<endl;
 		}
 		else if(ctrl == 3)
-		isEMpty(stack); 
+		isEmpty(stack); 
 	}while(ctrl!=4);
 }
