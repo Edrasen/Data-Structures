@@ -5,11 +5,11 @@ using namespace std;
 typedef unsigned char boolean;
 
 typedef struct node{
-    node *siguiente;
+    node *next;
     char elem;
     node(char c){
         elem = c;
-        siguiente = NULL;
+        next = NULL;
     }
 }node;
 
@@ -40,7 +40,7 @@ void enqueue(queue *&c, char e){
         c->bottom = aux;
     }
     else{
-        c->top->siguiente = aux;
+        c->top->next = aux;
         c->top = aux;
     }
 }
@@ -54,7 +54,7 @@ char Dequeue(queue *&c, char &l){
     {
         node *aux = c->top;
         l = c->bottom->elem;
-        aux = c->bottom->siguiente;
+        aux = c->bottom->next;
         delete(c->bottom);
         c->top = aux;
     }
@@ -74,7 +74,7 @@ char element (queue *c, int i){
         aux = c->top;
         for (j = 1; j < i; j++)
         {
-            aux = aux->siguiente;
+            aux = aux->next;
             e = aux->elem;
         }
         
@@ -86,7 +86,17 @@ char element (queue *c, int i){
     return e;
 }
 
-
+void destroy(queue *c){
+    node *aux;
+    while (c->bottom != NULL)
+    {
+        aux = c->bottom;
+        c->bottom = c->bottom->next;
+        delete(aux);
+    }
+    c->num_E = 0;
+    c->top = NULL;
+}
 
 int main(){
 
