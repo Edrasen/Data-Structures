@@ -28,7 +28,7 @@ void pop(node *&stack, int &d){
 
 bool isEmpty(node *stack){
 	if(stack == NULL)
-	cout<<"La pila esta vacia";
+	cout<<"La pila esta vacia"<<endl;
 	return true;
 }
 
