@@ -34,16 +34,52 @@ node* create(int A[], int n)
 void display(node *p){
     while (p)
     {
-        printf("%d \n", p->data);
+        printf("%d \t", p->data);
         p = p->next;
     }
+}
+
+void Rdisplay(node *p){
+    if(p != NULL){
+        printf("%d\t", p->data);
+        Rdisplay(p->next);
+    }
+}
+
+int count(node *p){
+    int x;
+    while(p){
+        x++;
+        p = p->next;
+    }
+    return x;
+}
+
+int Rcount(node *p){
+    return  p == NULL ? 0 : Rcount(p->next) + 1;
+}
+
+int Suma(node *p){
+    int sum = 0;
+    while (p)
+    {
+        sum+=(p->data);
+        p = p->next;
+    }
+    return sum;
+}
+
+int Rsum(node *p){
+    return p == NULL ? 0 : Rsum(p->next) + p->data;
 }
 
 int main()
 {
     node *mylist;
-    int A[] = {7, 9, 5, 3, 4};
-    mylist = create(A, 5);
-    display(mylist);
+    int A[] = {7, 9, 5, 3, 4,2};
+    mylist = create(A, 6);
+    Rdisplay(mylist);
+    printf("\nNumber of nodes is %d\n", Rcount(mylist));
+    printf("Sum of data in nodes is %d\n", Rsum(mylist));
     return 0;
 }
