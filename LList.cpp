@@ -208,6 +208,31 @@ void insinor(node *&lp, int x){
     node *nnode = new node(x);
     nnode->next = q->next;
     q->next = nnode;
+    }    
+}
+
+int delfirst(node *&lp){
+    node *aux = lp;
+    lp = aux->next;
+    delete(aux);
+}
+
+int delkey(node *&lp, int key){
+    node *p = lp;
+    node *q = NULL; 
+    while(p){
+        if(!q && p->data == key){
+            delfirst(lp);
+        }
+        else{
+            if(p->data == key)
+            {
+                q->next = p->next;
+                delete(p);
+            }
+        }
+        q = p;
+        p = p->next;
     }
 }
 
@@ -229,7 +254,9 @@ int main()
     push(mylist, 6); //we have added into the front part (also we can name it push)
     insertLst(mylist, 24);*/
     //insertaftr(mylist, 2);
-    insinor(mylist,1);
+    //insinor(mylist,1);
+    //delfirst(mylist);
+    delkey(mylist, 24);
     Rdisplay(mylist);
     printf("\nNumber of nodes is %d\n", Rcount(mylist));
     printf("last element on the list is %d \n", (last(mylist)->data));
