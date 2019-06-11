@@ -236,12 +236,102 @@ int delkey(node *&lp, int key){
     }
 }
 
+bool chckOrdr(node *lp){
+    int x = 0;
+    node *aux = lp;
+    while (aux)
+    {
+        if(aux->data < x)
+            return false;
+        x = aux->data;
+        aux = aux->next;
+    }
+    return true;
+}
+void sortedver(bool f){
+    if(f){
+        printf("List is sorted\n");
+    }
+    else
+    {
+        printf("List is not sorted\n");
+    }
+}
+
+void rmvrep(node *lp){
+    node *p = lp;
+    node *q = lp->next;
+    while (q)
+    {
+        if(p->data != q->data){
+            p = q;
+            q = q->next;
+        }
+        else
+        {          
+            p->next = q->next;
+            delete(q);
+            q = p->next;
+        }
+    }   
+}
+
+void reversewar(node *&lp){
+    int *A;
+    int i = 0;
+    node *q = lp;
+    A = (int*)malloc(sizeof(int)*count(lp));
+    while (q)
+    {
+        A[i] = q->data;
+        i++;
+        q = q->next;
+    }
+    q = lp;
+    while(q)
+    {
+        i--;
+        q->data = A[i];
+        q = q->next;
+    }
+}
+
+void revers(node *&lp){
+    node *p = lp;
+    node *q = NULL;
+    node *r;
+    while (p)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    lp = q;
+}
+/* 
+void Rrevers(node *q, node *&lp)
+{  
+    if(lp){
+        Rrevers(lp, lp->next);
+        lp->next = q;
+    }
+    else
+    {
+        lp = q;
+    }    
+}
+*/
+
 int main()
-{
+{ 
     node *mylist;
+    node *mylist2;
     node *temp;
+    int B[] = {10, 20, 20, 20, 30, 40, 50};
     int A[] = {3, 5, 7, 9, 12, 24};
     mylist = create(A, 6);
+    mylist2 = create(B,7);
     Rdisplay(mylist);
     printf("\nNumber of nodes is %d\n", Rcount(mylist));
     printf("Sum of data in nodes is %d\n", Rsum(mylist));
@@ -251,7 +341,7 @@ int main()
     temp = lsearch(mylist, 4);
     verification(temp);*/
     /*insert(mylist, 12, 3);
-    push(mylist, 6); //we have added into the front part (also we can name it push)
+    push(mylist, 6); //we have added on the front part (also we can name it push)
     insertLst(mylist, 24);*/
     //insertaftr(mylist, 2);
     //insinor(mylist,1);
@@ -260,5 +350,15 @@ int main()
     Rdisplay(mylist);
     printf("\nNumber of nodes is %d\n", Rcount(mylist));
     printf("last element on the list is %d \n", (last(mylist)->data));
+    sortedver(chckOrdr(mylist));
+    //Rrevers(NULL, mylist);
+    Rdisplay(mylist);
+    printf("\n");
+    //using mylist2
+    Rdisplay(mylist2);
+    rmvrep(mylist2);
+    printf("\n");
+    Rdisplay(mylist2);
+    printf("\n");
     return 0;
 }
