@@ -309,25 +309,100 @@ void revers(node *&lp){
     }
     lp = q;
 }
-/* 
-void Rrevers(node *q, node *&lp)
+void Rrevers(node *q, node *lp, node *&list)
 {  
     if(lp){
-        Rrevers(lp, lp->next);
+        Rrevers(lp, lp->next, list);
         lp->next = q;
     }
     else
     {
-        lp = q;
+        list = q;
     }    
 }
+
+node* concat(node *lp1, node *lp2){
+    node *aux = lp1;
+    while (aux->next)
+    {
+        aux = aux->next;
+    }
+    aux->next = lp2;
+    lp2 = NULL; 
+    return lp1;
+}
+/* 
+node* marging(node *l1, node *l2, node *&l1c, node *&l2c){
+    node *aux = NULL;
+    node *last = NULL;
+    if(l1->data < l2->data){
+        aux = last = l1;
+        l1c = l1c->next;
+        aux->next = NULL;
+        l1 = l1c;
+    }
+    else{
+        aux = last = l2;
+        l2c = l2c->next;
+        aux->next = NULL;
+        l2 = l2c;
+    }
+    while (l1 && l2)
+    {
+        if(l1c->data < l2c->data){
+            last->next = l1;
+            last = l1;
+            l1c = l1c->next;
+            last->next = NULL;
+            l1 = l1c;
+        }
+        else{
+            last->next = l2;
+            last = l2;
+            l2c = l2c->next;
+            last->next = NULL;
+            l2 = l2c;
+        }
+        if(l1)last->next = l1;
+        if(l2)last->next = l2; 
+    }
+}
 */
+
+bool isloop(node *lp){
+    node *p, *q;
+    p = q = lp;
+    do{
+        p = p->next;
+        q = q->next;
+        q = q!=NULL ? q->next : NULL;
+    }while (p&&q && p!=q);
+    if(p == q)
+        return true;
+    else
+    {
+        return false;
+    }
+}
+
+void loopver(bool f){
+    if(f){
+        printf("\nThere is a loop\n");
+    }
+    else
+    {
+        printf("\nThere is not a loop\n");
+    }
+}
 
 int main()
 { 
     node *mylist;
     node *mylist2;
     node *temp;
+    node *concatelist;
+    node *t1;
+    node *t2;
     int B[] = {10, 20, 20, 20, 30, 40, 50};
     int A[] = {3, 5, 7, 9, 12, 24};
     mylist = create(A, 6);
@@ -346,19 +421,35 @@ int main()
     //insertaftr(mylist, 2);
     //insinor(mylist,1);
     //delfirst(mylist);
-    delkey(mylist, 24);
+    //delkey(mylist, 24);
     Rdisplay(mylist);
     printf("\nNumber of nodes is %d\n", Rcount(mylist));
     printf("last element on the list is %d \n", (last(mylist)->data));
     sortedver(chckOrdr(mylist));
-    //Rrevers(NULL, mylist);
+    //revers(mylist);
+    //reversewar(mylist);
+    //Rrevers(NULL, mylist, mylist);
     Rdisplay(mylist);
     printf("\n");
     //using mylist2
-    Rdisplay(mylist2);
+    //Rdisplay(mylist2);
     rmvrep(mylist2);
     printf("\n");
+    rmvrep(mylist2);
     Rdisplay(mylist2);
     printf("\n");
+    //concatenated list
+    printf("\n");
+    concatelist = concat(mylist, mylist2);
+    //printf("\n");
+    //Rdisplay(marging(mylist,mylist2, mylist, mylist2));
+    //printf("\n");
+    /////////Proving loops
+    /* 
+    t1 = mylist->next->next;
+    t2 = mylist->next->next->next->next->next;
+    t2->next = t1;
+    loopver(isloop(mylist));
+    */
     return 0;
 }
