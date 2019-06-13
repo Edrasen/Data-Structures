@@ -81,7 +81,8 @@ void insert(node *&lp, int index, int x){
     }
     
 }
-
+//lp is te pointer to the circular list which we want modify 
+//index is the number of node which we want to delete
 int del(node *lp, int index){
     int x;
     node *q;
@@ -125,7 +126,7 @@ int main(){
     int A[]={3,5,7,9,12};
     myCList = create(A, 5);
     insert(myCList,4, 45);
-    del(myCList, 4);
+    printf("%d\n", del(myCList, 4));
     Rdisplay(myCList, myCList);
     printf("\n");
     return 0;
