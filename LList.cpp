@@ -331,43 +331,39 @@ node* concat(node *lp1, node *lp2){
     lp2 = NULL; 
     return lp1;
 }
-/* 
-node* marging(node *l1, node *l2, node *&l1c, node *&l2c){
+
+node* merging(node *l1, node *l2){
     node *aux = NULL;
     node *last = NULL;
     if(l1->data < l2->data){
         aux = last = l1;
-        l1c = l1c->next;
+        l1 = l1->next;
         aux->next = NULL;
-        l1 = l1c;
     }
     else{
         aux = last = l2;
-        l2c = l2c->next;
+        l2 = l2 ->next;
         aux->next = NULL;
-        l2 = l2c;
     }
     while (l1 && l2)
     {
-        if(l1c->data < l2c->data){
+        if(l1->data < l2->data){
             last->next = l1;
             last = l1;
-            l1c = l1c->next;
+            l1 = l1->next;
             last->next = NULL;
-            l1 = l1c;
         }
         else{
             last->next = l2;
             last = l2;
-            l2c = l2c->next;
+            l2 = l2->next;
             last->next = NULL;
-            l2 = l2c;
         }
         if(l1)last->next = l1;
         if(l2)last->next = l2; 
     }
+    return aux;
 }
-*/
 
 bool isloop(node *lp){
     node *p, *q;
@@ -415,9 +411,8 @@ int main()
     temp = lsearch(mylist, 2);
     temp = lsearch(mylist, 4);
     verification(temp);*/
-    /*insert(mylist, 12, 3);
-    push(mylist, 6); //we have added on the front part (also we can name it push)
-    insertLst(mylist, 24);*/
+    //insert(mylist, 15, 3);
+    //insertLst(mylist, 24);
     //insertaftr(mylist, 2);
     //insinor(mylist,1);
     //delfirst(mylist);
@@ -440,9 +435,10 @@ int main()
     printf("\n");
     //concatenated list
     printf("\n");
-    concatelist = concat(mylist, mylist2);
+    //concatelist = concat(mylist, mylist2);
+    Rdisplay(merging(mylist, mylist2));
+    printf("\n");
     //printf("\n");
-    //Rdisplay(marging(mylist,mylist2, mylist, mylist2));
     //printf("\n");
     /////////Proving loops
     /* 
