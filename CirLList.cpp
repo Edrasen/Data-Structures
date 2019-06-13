@@ -50,6 +50,16 @@ void Rdisplay(node *lp, node *aux){
     flag = 0;
 }
 
+int length(node *lp){
+    int i = 0;
+    node *p = lp;
+    do{
+        i++;;
+        p = p->next;
+    }while(p != lp);
+    return i;
+}
+
 void insert(node *&lp, int index, int x){
     node *nnode;
     node *aux = lp;
@@ -79,15 +89,17 @@ void insert(node *&lp, int index, int x){
         nnode->next = aux->next;
         aux->next = nnode;
     }
-    
 }
 //lp is te pointer to the circular list which we want modify 
 //index is the number of node which we want to delete
-int del(node *lp, int index){
+int del(node *&lp, int index){
     int x;
     node *q;
     node *aux = lp;
     int i;
+    
+    if(index < 0 || index > length(lp))
+        return -1;
     if (index == 1)
     {
         while (aux->next != lp)
@@ -125,8 +137,11 @@ int main(){
     node *myCList;
     int A[]={3,5,7,9,12};
     myCList = create(A, 5);
+    //printf("El tamaño de las lista es %d\n", length(myCList));
     insert(myCList,4, 45);
-    printf("%d\n", del(myCList, 4));
+    //printf("El tamaño de las lista es %d\n", length(myCList));
+    printf("%d\n", del(myCList, 1));
+    printf("El tamaño de las lista es %d\n", length(myCList));
     Rdisplay(myCList, myCList);
     printf("\n");
     return 0;
