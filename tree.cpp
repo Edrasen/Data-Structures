@@ -133,10 +133,10 @@ void RinOrder(node *p){
     }
 }
 
-void RposOrder(node *p){
+void RposOrder(node **root, node *p){
     if(p != NULL){
-        RpreOrder(p->l);
-        RpreOrder(p->r);
+        RposOrder(root, p->l);
+        RposOrder(root, p->r);
         cout<<p->data;
     }
 }
