@@ -102,6 +102,20 @@ int rmv(node *&lp, int index){
     return x;
 }
 
+node* reverse(node *&lp){
+    node *temp;
+    node *p = lp;
+    while(p){
+        temp = p->next;
+        p->next = p->prev;
+        p->prev = temp;
+        p = p->prev;
+        if(p != NULL && p->next == NULL)
+        lp = p;
+    }
+    return lp;
+}
+
 int main(){
     int A[] = {3, 5 ,7, 9};
     node *myDLlist;
@@ -109,7 +123,8 @@ int main(){
     Display(myDLlist);
     insert(myDLlist, 3, 18);
     printf("\n");
-    rmv(myDLlist, 1);
+    reverse(myDLlist);
+    //rmv(myDLlist, 1);
     Display(myDLlist);
     printf("\nEl numero de nodos en la lista es %d\n", count(myDLlist));
 }
