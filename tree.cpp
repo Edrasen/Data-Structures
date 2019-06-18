@@ -127,9 +127,9 @@ void RpreOrder(node *p){
 
 void RinOrder(node *p){
     if(p != NULL){
-        RpreOrder(p->l);
+        RinOrder(p->l);
         cout<<p->data;
-        RpreOrder(p->r);
+        RinOrder(p->r);
     }
 }
 
@@ -223,6 +223,18 @@ node* Del(node *root,int key)
         }
     }
     return p;
+}
+
+int numleafs(node *root)
+{
+    int count;
+    if(root != NULL){
+        if(root->l && root->r)count++;
+        else{
+            numleafs(root->l);
+            numleafs(root->r);
+        }
+    }
 }
 
 int main(){
